@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept Store | E-commerce Professionale</title>
+    
+    <!-- Collegamento al file CSS personalizzato -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Alpine.js (Leggerissimo, gestisce il carrello all'istante senza rallentare la pagina) -->
+    <script defer src="https://jsdelivr.net"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body x-data="{ cartOpen: false, cartCount: 0, cartItems: [] }">
+
+    <!-- BARRA DI NOTIFICA -->
+    <div class="notification-bar">
+        Spedizione gratuita per ordini superiori a €75 • Consegna in 24/48h
+    </div>
+
+    <!-- NAVBAR HEADER -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="#" class="logo">
+                Concept<span>.</span>Store
+            </a>
+
+            <!-- Navigazione Desktop -->
+            <nav class="main-nav">
+                <a href="#" class="nav-link">Novità</a>
+                <a href="#" class="nav-link">Collezioni</a>
+                <a href="#" class="nav-link">Uomo</a>
+                <a href="#" class="nav-link">Donna</a>
+            </nav>
+
+            <!-- Azioni Utente -->
+            <div class="user-actions">
+                <!-- Cerca -->
+                <button class="icon-btn" aria-label="Cerca">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </button>
+                <!-- Carrello (Trigger) -->
+                <button @click="cartOpen = true" class="icon-btn" aria-label="Apri Carrello">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                    <span x-show="cartCount > 0" x-text="cartCount" x-cloak class="cart-badge"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="hero-bg" style="background-image: url('https://unsplash.com');"></div>
+        <div class="hero-content">
+            <span class="hero-tag">Nuova Collezione 2026</span>
+            <h1 class="hero-title">Il minimalismo incontra la qualità.</h1>
+            <p class="hero-description">
+                Prodotti essenziali progettati per durare nel tempo, realizzati in modo sostenibile con materiali premium.
+            </p>
+            <a href="#prodotti" class="cta-button">Scopri la selezione</a>
+        </div>
+    </section>
+
+    <!-- SEZIONE PRODOTTI -->
+    <main id="prodotti" class="products-section">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">I Pezzi Chiave</h2>
+                <p class="section-subtitle">I prodotti più desiderati della settimana.</p>
+            </div>
+        </div>
+
+        <!-- Griglia Prodotti -->
+        <div class="products-grid">
+            
+            <!-- Prodotto 1 -->
+            <div class="product-card" x-data="{ name: 'Zaino Minimal in Pelle', price: 149 }">
+                <div class="product-image-wrapper">
+                    <img src="https://unsplash.com" alt="Zaino" class="product-image">
+                    <span class="badge">Novità</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name"><a href="#" x-text="name"></a></h3>
+                    <p class="product-price" x-text="'€' + price"></p>
+                </div>
+                <p class="product-category">Pelle pieno fiore</p>
+                <button @click="cartCount++; cartItems.push({name: name, price: price}); cartOpen = true" class="add-to-cart-btn">
+                    Aggiungi al carrello
+                </button>
+            </div>
+
+            <!-- Prodotto 2 -->
+            <div class="product-card" x-data="{ name: 'Occhiali da Sole Classici', price: 89 }">
+                <div class="product-image-wrapper">
+                    <img src="https://unsplash.com" alt="Occhiali" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name"><a href="#" x-text="name"></a></h3>
+                    <p class="product-price" x-text="'€' + price"></p>
+                </div>
+                <p class="product-category">Protezione UV400</p>
+                <button @click="cartCount++; cartItems.push({name: name, price: price}); cartOpen = true" class="add-to-cart-btn">
+                    Aggiungi al carrello
+                </button>
+            </div>
+
+            <!-- Prodotto 3 -->
+            <div class="product-card" x-data="{ name: 'Orologio Cronografo Nero', price: 210 }">
+                <div class="product-image-wrapper">
+                    <img src="https://unsplash.com" alt="Orologio" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name"><a href="#" x-text="name"></a></h3>
+                    <p class="product-price" x-text="'€' + price"></p>
+                </div>
+                <p class="product-category">Movimento al quarzo</p>
+                <button @click="cartCount++; cartItems.push({name: name, price: price}); cartOpen = true" class="add-to-cart-btn">
+                    Aggiungi al carrello
+                </button>
+            </div>
+
+            <!-- Prodotto 4 -->
+            <div class="product-card" x-data="{ name: 'Profumo Fluide N.5', price: 95 }">
+                <div class="product-image-wrapper">
+                    <img src="https://unsplash.com" alt="Profumo" class="product-image">
+                    <span class="badge hot">Hot</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name"><a href="#" x-text="name"></a></h3>
+                    <p class="product-price" x-text="'€' + price"></p>
+                </div>
+                <p class="product-category">Eau de Parfum 100ml</p>
+                <button @click="cartCount++; cartItems.push({name: name, price: price}); cartOpen = true" class="add-to-cart-btn">
+                    Aggiungi al carrello
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- CARRELLO LATERALE (DRAWER) -->
+    <div x-show="cartOpen" class="cart-drawer" x-cloak>
+        <!-- Sfondo oscurato -->
+        <div @click="cartOpen = false" class="cart-overlay"></div>
+
+        <!-- Pannello Carrello -->
+        <div class="cart-panel">
+            <div class="cart-header">
+                <h2 class="cart-title">Il tuo carrello</h2>
+                <button @click="cartOpen = false" class="icon-btn" aria-label="Chiudi Carrello">
+                    <svg style="width:24px; height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <!-- Lista articoli -->
+            <div class="cart-body">
+                <template x-if="cartItems.length === 0">
+                    <p style="text-align: center; color: var(--color-text-muted); font-size: 0.875rem; margin-top: 2rem;">Il carrello è vuoto.</p>
+                </template>
+                
+                <template x-for="(item, index) in cartItems" :key="index">
+                    <div class="cart-item">
+                        <div>
+                            <p style="font-size: 0.875rem; font-weight: 500;" x-text="item.name"></p>
+                            <p style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 4px;" x-text="'€' + item.price"></p>
+                        </div>
+                        <button @click="cartItems.splice(index, 1); cartCount--" class="remove-item-btn">Rimuovi</button>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Footer Carrello con Totale -->
+            <div class="cart-footer">
+                <div class="cart-total-row">
+                    <p>Subtotale</p>
+                    <p style="font-weight: 600;" x-text="'€' + cartItems.reduce((acc, curr) => acc + curr.price, 0)"></p>
+                </div>
+                <p style="font-size: 0.75rem; color: var(--color-text-muted); margin-bottom: 24px;">Tasse e spedizione calcolate al pagamento.</p>
+                <button @click="alert('Procedura di pagamento simulata!')" class="checkout-btn">
+                    Procedi al Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <p class="footer-logo">Concept.Store</p>
+        <p>&copy; 2026 Tutti i diritti riservati. P.IVA 01234567890</p>
+    </footer>
+
+</body>
+</html>
+
